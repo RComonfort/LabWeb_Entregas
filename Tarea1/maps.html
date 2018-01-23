@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+     
+  <meta name="viewport" content="width=device-width" />
+   
+   <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100% }
+    </style>
+
+<script type="text/javascript"
+  src="https://maps.googleapis.com/maps/api/js?&sensor=true">
+</script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+        var mapOptions = null;
+        var map = null;
+       
+        var infowindow;
+        (function () 
+            {
+                google.maps.Map.prototype.markers = new Array();
+                google.maps.Map.prototype.getMarkers = function ()
+                {
+                return this.markers
+                };
+            
+                google.maps.Map.prototype.clearMarkers = function () 
+                {
+                    for (var i = 0; i < this.markers.length; i++) {
+                        this.markers[i].setMap(null);
+                    }
+                this.markers = new Array();
+                };
+            
+                google.maps.Marker.prototype._setMap = google.maps.Marker.prototype.setMap;
+                google.maps.Marker.prototype.setMap = function (map) 
+                {
+                    if (map) {
+                        map.markers[map.markers.length] = this;
+                    }
+                    this._setMap(map);
+                }
+        }
+            )();
+        
+        function initMap() {
+            
+            lat= 19.01826447750003;
+            lng = -98.24133396148682;
+            
+          
+            mapOptions = {
+                center: new google.maps.LatLng(lat, lng),
+                zoom: 14,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            map = new google.maps.Map(document.getElementById("map_canvas"),
+                mapOptions);
+            
+            google.maps.event.addListener(map, 'click', function (event) {
+                
+                lat =event.latLng.lat();
+                lng=event.latLng.lng();
+
+                document.getElementById('lat').value=lat;
+                document.getElementById('lng').value=lng;
+                
+                map.clearMarkers();
+                drawMarker();
+            });
+
+            drawMarker();
+
+        }
+
+        
+        function drawMarker() 
+        {
+            
+            var infowindow = new google.maps.InfoWindow();
+            var marker, i; 
+
+            var nombre = "A pin";//sessionStorage.nombreCliente;
+            var message = document.getElementById("pinMessage").value;//"Tec de Mty";
+            var pinColor = document.getElementById("pinColor").value.substr(1);//"FF0000";
+            var charMarker = document.getElementById("pinChar").value;//"$";//%E2%80%A2 
+
+            var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=" + charMarker + "|" + pinColor,
+                    new google.maps.Size(21, 34),
+                    new google.maps.Point(0, 0),
+                    new google.maps.Point(10, 34));
+
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(lat, lng),
+                    icon: pinImage,
+                    title: '' + message,
+                    map: map
+                });
+
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        infowindow.setContent(nombre);
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+           
+        }
+
+        
+    
+    function obtenerDireccion()
+    {
+        //alert("obteniendo direccion ...");
+
+        var geocoder = new google.maps.Geocoder;
+        
+        var mylat = document.getElementById('lat').value;
+        var mylng = document.getElementById('lng').value;
+
+        var latlng = {lat: parseFloat(mylat), lng: parseFloat(mylng)};
+        geocoder.geocode({'location': latlng}, function(results, status) {
+            if (status === 'OK') {
+            if (results[0]) {
+                //window.alert(results[0].formatted_address);
+                //alert(JSON.stringify(results[0]));
+            
+                document.getElementById('street').value = results[0].address_components[1].long_name + ", " + results[0].address_components[0].long_name;
+                document.getElementById('sublocality').value = results[0].address_components[2].short_name;
+                document.getElementById('zipCode').value = results[0].address_components[7].short_name;
+                document.getElementById('locality').value = results[0].address_components[3].short_name + ", " + results[0].address_components[5].short_name + ", "  + results[0].address_components[6].short_name;
+
+            } else {
+                window.alert('No results found');
+            }
+            } else {
+                window.alert('Geocoder failed due to: ' + status);
+            }
+        });
+    }
+
+
+    function obtenerClima()
+    {
+        //alert("obteniendo clima ...");
+
+        var lat = 19.0433;
+        var lng = -98.2019;
+        var apiKey = "17f79e6dbec989fa0b19444f82406f99";//"2af72ef62258728d72777bef612f2a3e";
+
+      $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + 
+        lat + "&lon=" + lng + "&appid=" + apiKey + "&units=metric", function(data) 
+        {
+            //alert(JSON.stringify(data));
+            document.getElementById('weather').value = data.weather[0].main;
+            document.getElementById('pressure').value = data.main.pressure;
+            document.getElementById('humidity').value = data.main.humidity;
+            document.getElementById('temperature').value = data.main.temp;
+        })
+    }
+
+    </script>
+  
+  <style type="text/css">
+        .colorYellow { color: yellow; }
+        .colorRed { color: red; }
+        .colorBlue { color: blue; }
+        .colorGreen { color: green; }
+ </style>
+ 
+</head>
+
+<body onload="initMap()">
+   
+<div class="jumbotron jumbotron-fluid">
+    <table class = "table" border="0">
+        <tr>
+            <td class='colorBlue'> <h1>Google</h1></td>
+            <td class='colorRed'><h1>Maps</h1></td>
+            <td class='colorYellow'><b> <h1>Demo</h1> </b></td>
+            <td class='colorGreen'><b> <h3>v3</h3> </b></td>
+        </tr>
+    </table>
+
+    <table class = "table">
+    <tr>
+        <td>
+            <div class = "container">
+                LAT:
+                <input name="lat" id="lat" type="text" size="10"/>
+                LNG:
+                <input name="lng" id="lng" type="text" size="10"/>
+            </div>
+            <div class = "container">
+                <form>
+                    Character de pin: 
+                    <input type="text" name="pinChar" id="pinChar">
+                    Mensaje de pin:
+                    <input type="text" name="pinMessage" id="pinMessage">
+                    Color de pin: 
+                    <input type="color" name="pinColor" id="pinColor">
+                </form>
+                <form>
+                    <label for="street">Calle #: </label>
+                    <input type="text" id="street" maxlength = "25" size = "25" readonly>
+
+                    <label for="sublocality">Colonia: </label>
+                    <input type="text" id="sublocality" maxlength = "25" size = "25" readonly>
+
+                    <label for="zipCode">CP: </label>
+                    <input type="text" id="zipCode" maxlength = "5" size = "5" readonly>
+
+                    <label for="locality">Localidad: </label>
+                    <input type="text" id="locality" maxlength = "25" size = "25" readonly>
+
+                    <input type="button" value="Obtener Direccion" onclick="obtenerDireccion()"/>
+
+                </form>
+                <form>
+                    <label for = "weather">Clima: </label>
+                    <input type = "text" id="weather" readonly>
+
+                    <label for = "pressure">Presión: </label>
+                    <input type = "text" id="pressure" readonly>
+
+                    <label for = "humidity">Humedad: </label>
+                    <input type = "text" id="humidity" readonly>
+
+                    <label for = "temperature">Temperatura (C°): </label>
+                    <input type = "text" id="temperature" readonly>
+
+                    <input type="button" value="Obtener Clima" onclick="obtenerClima()"/>
+                </form>
+                    
+            </div>    
+        </td>
+    </tr>
+    </table>
+</div>
+
+
+      <div id="map_canvas"  style="width: 100%; height: 90%; float: left; border: 1px solid black;">
+
+      </div>
+     
+</body>
+</html>
