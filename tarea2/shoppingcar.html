@@ -73,9 +73,6 @@
 </body>
 </html>
 
-
-
-
 <script>
 
 var myDataProductos;
@@ -103,52 +100,52 @@ var my_producto = $("#id_productos").val();
 
 function getProducts(){
 
-var listProducts = []
+    var listProducts = []
 
-var myProduct1 = new ShoppingCarProduct();
-myProduct1.id = "001";
-myProduct1.name = "Laptop Dell";
-myProduct1.price = "12000";
+    var myProduct1 = new ShoppingCarProduct();
+    myProduct1.id = "001";
+    myProduct1.name = "Laptop Dell";
+    myProduct1.price = "12000";
 
-var myProduct2 = new ShoppingCarProduct();
-myProduct2.id = "002";
-myProduct2.name = "Xbox One S";
-myProduct2.price = "9500";
+    var myProduct2 = new ShoppingCarProduct();
+    myProduct2.id = "002";
+    myProduct2.name = "Xbox One S";
+    myProduct2.price = "9500";
 
-var myProduct3 = new ShoppingCarProduct();
-myProduct3.id = "003";
-myProduct3.name = "RaspBerry Pi 3";
-myProduct3.price = "1250";
+    var myProduct3 = new ShoppingCarProduct();
+    myProduct3.id = "003";
+    myProduct3.name = "RaspBerry Pi 3";
+    myProduct3.price = "1250";
 
-listProducts.push(myProduct1);
-listProducts.push(myProduct2);
-listProducts.push(myProduct3);
+    listProducts.push(myProduct1);
+    listProducts.push(myProduct2);
+    listProducts.push(myProduct3);
 
 
-try
-{ 
-    tweets = JSON.stringify(listProducts);
-    alert(tweets);
-  
+    try
+    { 
+        tweets = JSON.stringify(listProducts);
+        alert(tweets);
     
-    tweets = JSON.parse(tweets);
-    alert(tweets);
-    myDataProductos = tweets; 
         
-            tweets.forEach(function (tweet) 
-                {
-                    alert(tweet.id + "- " + tweet.name);
-                    $('#id_productos').append($("<option></option>").attr("value", tweet.id).text(tweet.name));
+        tweets = JSON.parse(tweets);
+        alert(tweets);
+        myDataProductos = tweets; 
+            
+                tweets.forEach(function (tweet) 
+                    {
+                        alert(tweet.id + "- " + tweet.name);
+                        $('#id_productos').append($("<option></option>").attr("value", tweet.id).text(tweet.name));
 
-                });
-                
-  
-  
-}
-catch(e)
-{
-  alert("error : " +  e);
- }
+                    });
+                    
+    
+    
+    }
+    catch(e)
+    {
+        alert("error : " +  e);
+    }
 }
 
 
