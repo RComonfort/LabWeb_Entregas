@@ -266,7 +266,7 @@
 		this.Importe = 0;
 		
 		//because f consistency
-		this.discountPercent = 0;
+		this.discountAmount = 0;
 		this.imageUrl = '';
 
         this.PorcDesc1 = 0;
@@ -316,9 +316,9 @@
 
             item.Precio = parseFloat(document.getElementById("Precio").value);
             item.Cantidad = cantidad;
-			item.discountPercent = parseFloat((document.getElementById("Discount").value)/100) ;
+			item.discountAmount = (1 - ( (parseFloat(document.getElementById("Discount").value)) / 100  )) * item.Precio;
 
-            var importe = item.Precio * (1 - item.discountPercent)  * item.Cantidad;
+            var importe = (item.Precio - item.discountAmount)  * item.Cantidad;
         
 			item.Importe = Math.round(importe * 100) / 100;
 			
@@ -344,7 +344,7 @@
                     Cantidad += parseFloat(item.Cantidad);
                     currentUserShoppingCart[c].Cantidad = Cantidad;
             
-                    var importe = item.Precio * (1 - item.discountPercent) * Cantidad;
+                    var importe = (item.Precio - item.discountAmount)  * item.Cantidad;
         
                     currentUserShoppingCart[c].Importe = Math.round(importe * 100) / 100;
         
@@ -421,7 +421,7 @@
 
 			cellDescuento.innerHTML = tweet.discountPercent;
 			cellImporte.innerHTML = tweet.Importe;
-			cellImagen.innerHTML = "<td><img src=\"" + tweet.imageUrl + "\" height=\"60\" width=\"60\"/></td>";
+			cellImagen.innerHTML = "<td><img src=\"" + tweet.imageUrl + "\" height=\"90\" width=\"90\"/></td>";
 
 			cellBorrar.innerHTML = "<a href=\"javascript: void();\" onclick=\"deleteItem(" + tweet.ProductID + ")\">Borrar</a>";
 
