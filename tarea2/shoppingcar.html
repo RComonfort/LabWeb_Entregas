@@ -176,7 +176,7 @@
         myProduct1.name = "Laptop Dell";
         myProduct1.price = "12000";
         myProduct1.url = 'https://www.paklap.pk/media/catalog/product/cache/1/image/9c5004876a717e4eff484ec42ea17046/7/5/7567_red_color.jpg';
-        myProduct1.discount = "0.15";
+        myProduct1.discountPercent = "0.15";
 
         var myProduct2 = new ShoppingCarProduct();
         myProduct2.id = "002";
@@ -397,6 +397,8 @@
         
 				currentUserShoppingCart[c].Importe = Math.round(importe * 100) / 100;
 				
+                currentUserShoppingCart[c].Cantidad = Cantidad;
+
 				showScar(); //redraw table
 			}
 		}
@@ -452,9 +454,9 @@
 			//cellBorrar.innerHTML = "<a href=\"javascript: void();\" onclick=\"deleteItem(" + tweet.ProductID + ")\">Borrar</a>";
 			
 			cellBorrar.innerHTML = 
-				" <td><input type=\"button\" onclick=\"modifyShoppingCartItemQuantity(" + tweet.ProductID + " , 1)\"  value=\" + \"/>"
+				" <input type=\"button\" onclick=\"modifyShoppingCartItemQuantity(" + tweet.ProductID + " , 1)\"  value=\" + \"/>"
 					+  
-				" <td><input type=\"button\" onclick=\"modifyShoppingCartItemQuantity(" + tweet.ProductID + " , -1)\"  value=\" - \"/>  ";
+				" <input type=\"button\" onclick=\"modifyShoppingCartItemQuantity(" + tweet.ProductID + " , -1)\"  value=\" - \"/>  ";
 
 
 			totalUni += parseFloat(tweet.Cantidad);
