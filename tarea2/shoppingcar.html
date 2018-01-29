@@ -316,7 +316,7 @@
 
             item.Precio = parseFloat(document.getElementById("Precio").value);
             item.Cantidad = cantidad;
-			item.discountAmount = (1 - ( (parseFloat(document.getElementById("Discount").value)) / 100  )) * item.Precio;
+			item.discountAmount = ( (parseFloat(document.getElementById("Discount").value)) / 100  ) * item.Precio;
 
             var importe = (item.Precio - item.discountAmount)  * item.Cantidad;
         
@@ -421,7 +421,7 @@
 
 			cellDescuento.innerHTML = tweet.discountAmount;
 			cellImporte.innerHTML = tweet.Importe;
-			cellImagen.innerHTML = "<td><img src=\"" + tweet.imageUrl + "\" height=\"90\" width=\"90\"/></td>";
+			cellImagen.innerHTML = "<td><img src=\"" + tweet.imageUrl + "\" height=\"100\" width=\"100\"/></td>";
 
 			cellBorrar.innerHTML = "<a href=\"javascript: void();\" onclick=\"deleteItem(" + tweet.ProductID + ")\">Borrar</a>";
 

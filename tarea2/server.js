@@ -4,7 +4,7 @@ var PORT = 8082;
 var app=express();
 app.get ('/', function(req, res)
 {
-    res.sendfile ('shoppingcar.html')
+    res.sendFile ('shoppingcar.html')
 });
 
 app.listen (PORT);
