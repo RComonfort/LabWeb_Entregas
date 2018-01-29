@@ -20,10 +20,10 @@
     <select  id="id_productos"  onchange="getDataProductos()"></select>                                           
                                             
     <label for="Precio">Precio</label>                           
-    <input placeholder="0.00" id="Precio" type="text">
+    <input placeholder="0.00" id="Precio" type="text" readonly>
     
     <label for="Discount">Descuento</label>                           
-    <input placeholder="0.00" id="Discount" type="text">
+    <input placeholder="0.00" id="Discount" type="text" readonly>
                         
     <label for="Cantidad">Cantidad</label>
     <input type="text" size="1" id="Cantidad" value="1" onkeydown="if (event.keyCode == 13) document.getElementById('addShoppingCar').click()"/>
@@ -316,7 +316,7 @@
 
             item.Precio = parseFloat(document.getElementById("Precio").value);
             item.Cantidad = cantidad;
-			item.discountPercent = parseFloat(document.getElementById("Discount").value);
+			item.discountPercent = parseFloat((document.getElementById("Discount").value)/100) ;
 
             var importe = item.Precio * (1 - item.discountPercent)  * item.Cantidad;
         
@@ -421,7 +421,7 @@
 
 			cellDescuento.innerHTML = tweet.discountPercent;
 			cellImporte.innerHTML = tweet.Importe;
-			cellImagen.innerHTML = "<td><img src=\"" + tweet.imageUrl + "\"/></td>";
+			cellImagen.innerHTML = "<td><img src=\"" + tweet.imageUrl + "\" height=\"60\" width=\"60\"/></td>";
 
 			cellBorrar.innerHTML = "<a href=\"javascript: void();\" onclick=\"deleteItem(" + tweet.ProductID + ")\">Borrar</a>";
 
