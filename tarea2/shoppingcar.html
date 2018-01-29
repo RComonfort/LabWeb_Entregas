@@ -386,6 +386,8 @@
 			{
 				var Cantidad = parseFloat(currentUserShoppingCart[c].Cantidad) + deltaQuantity;
 
+                alert ("New cantidad: " + cantidad);
+
 				if (Cantidad == 0)
 				{
 					deleteItem (ProductID);
