@@ -175,21 +175,21 @@
         myProduct1.name = "Laptop Dell";
         myProduct1.price = "12000";
         myProduct1.url = 'https://www.paklap.pk/media/catalog/product/cache/1/image/9c5004876a717e4eff484ec42ea17046/7/5/7567_red_color.jpg';
-        myProduct1.discount = .15;
+        myProduct1.discount = "0.15";
 
         var myProduct2 = new ShoppingCarProduct();
         myProduct2.id = "002";
         myProduct2.name = "Xbox One S";
         myProduct2.price = "9500";
         myProduct2.url = 'https://cnet1.cbsistatic.com/img/Dri_6795D7EYs2dvS-RTfEvwNbc=/770x433/2016/08/01/81dd9937-d2f9-4730-8d9b-cca30379da27/xboxones.jpg';
-        myProduct2.discountPercent = .03;
+        myProduct2.discountPercent = "0.03";
 
         var myProduct3 = new ShoppingCarProduct();
         myProduct3.id = "003";
         myProduct3.name = "RaspBerry Pi 3";
         myProduct3.price = "1250";
         myProduct3.url = 'https://img.banggood.com/thumb/water/oaupload/banggood/images/39/3C/7fd0736b-db37-4677-b2a8-9a386a853eba.jpg';
-        myProduct3.discountPercent = .25;
+        myProduct3.discountPercent = "0.25";
 
         listProducts.push(myProduct1);
         listProducts.push(myProduct2);
@@ -320,23 +320,31 @@
 
             var importe = item.Precio * (1 - item.discountPercent)  * item.Cantidad;
         
-            item.Importe = Math.round(importe * 100) / 100;
+			item.Importe = Math.round(importe * 100) / 100;
+			
+
+			//Get image url for this ShoppingCartProduct and shove it in ShoppingCartItem
+			myDataProductos.forEach(function (tweet) 
+			{
+				//alert(tweet.nombre);
+				if (tweet.id == item.ProductID)
+				{
+					item.imageUrl = tweet.url;
+				}
+			});
             
             //alert(i);
             var exist = 0;
             for (var c = currentUserShoppingCart.length; c--;) {
                 var it = currentUserShoppingCart[c];
 
-
                 if (it.ProductID == item.ProductID) {
-                    var Cantidad = 0;
-                    Cantidad = parseFloat(currentUserShoppingCart[c].Cantidad);
+
+                    var Cantidad = parseFloat(currentUserShoppingCart[c].Cantidad);
                     Cantidad += parseFloat(item.Cantidad);
                     currentUserShoppingCart[c].Cantidad = Cantidad;
-
-                    var importe = 0;
             
-                    importe = item.Precio * Cantidad;
+                    var importe = item.Precio * (1 - item.discountPercent) * Cantidad;
         
                     currentUserShoppingCart[c].Importe = Math.round(importe * 100) / 100;
         
@@ -405,7 +413,6 @@
 			var cellImagen = rowCir.insertCell(5);
 
 			var cellBorrar = rowCir.insertCell(6);
-			var url = "<a href=\"javascript: void();\" onclick=\"deleteItem(" + tweet.ProductID + ")\">Borrar</a>";
 
 
 			cellCantidad.innerHTML = tweet.Cantidad;
@@ -414,10 +421,9 @@
 
 			cellDescuento.innerHTML = tweet.discountPercent;
 			cellImporte.innerHTML = tweet.Importe;
-			cellImagen.innerHTML = tweet.imageUrl;
+			cellImagen.innerHTML = "<td><img src=\"" + tweet.imageUrl + "\"/></td>";
 
-			cellBorrar.innerHTML = url;
-
+			cellBorrar.innerHTML = "<a href=\"javascript: void();\" onclick=\"deleteItem(" + tweet.ProductID + ")\">Borrar</a>";
 
 			totalUni += parseFloat(tweet.Cantidad);
 			totImporte += tweet.Importe;
@@ -444,7 +450,6 @@
     
         sessionStorage.setObject('UserShoppingCart', currentUserShoppingCart);
         showScar();
-
     }
 
     function clearSessionStorage()
