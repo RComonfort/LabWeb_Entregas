@@ -389,17 +389,18 @@
 				if (Cantidad == 0)
 				{
 					deleteItem (ProductID);
-					return;
 				}
-
-				//recalculate import
-				var importe = (it.Precio - it.discountAmount)  * Cantidad;
+                else
+                {
+                    //recalculate import
+				    var importe = (it.Precio - it.discountAmount)  * Cantidad;
         
-				currentUserShoppingCart[c].Importe = Math.round(importe * 100) / 100;
-				
-                currentUserShoppingCart[c].Cantidad = Cantidad;
+                    currentUserShoppingCart[c].Importe = Math.round(importe * 100) / 100;
+                    
+                    currentUserShoppingCart[c].Cantidad = Cantidad;
 
-				showScar(); //redraw table
+                    showScar(); //redraw table
+                }
 			}
 		}
 	}
