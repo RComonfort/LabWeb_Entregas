@@ -322,7 +322,6 @@
         
 			item.Importe = Math.round(importe * 100) / 100;
 			
-
 			//Get image url for this ShoppingCartProduct and shove it in ShoppingCartItem
 			myDataProductos.forEach(function (tweet) 
 			{
@@ -344,7 +343,7 @@
                     Cantidad += parseFloat(item.Cantidad);
                     currentUserShoppingCart[c].Cantidad = Cantidad;
             
-                    var importe = (item.Precio - item.discountAmount)  * item.Cantidad;
+                    var importe = (item.Precio - item.discountAmount)  * Cantidad;
         
                     currentUserShoppingCart[c].Importe = Math.round(importe * 100) / 100;
         
