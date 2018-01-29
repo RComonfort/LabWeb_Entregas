@@ -16,8 +16,9 @@
 <h5>Simple Shopping Cart</h5>
    
     <label>Productos</label>
-
-    <select  id="id_productos"  onchange="getDataProductos()"></select>                                           
+    <select  id="id_productos"  onchange="getDataProductos()" >
+		<option value="" disabled="disabled" selected="selected">Please select a Product</option>
+	</select>                                           
                                             
     <label for="Precio">Precio</label>                           
     <input placeholder="0.00" id="Precio" type="text" readonly>
@@ -375,6 +376,32 @@
         }
     }
 
+	function modifyShoppingCartItemQuantity(ProductID, deltaQuantity)
+	{
+		for (var c = currentUserShoppingCart.length; c--;) 
+		{
+			var it = currentUserShoppingCart[c];
+			
+			if (it.ProductID == ProductID) 
+			{
+				var Cantidad = parseFloat(currentUserShoppingCart[c].Cantidad) + deltaQuantity;
+
+				if (Cantidad == 0)
+				{
+					deleteItem (ProductID);
+					return;
+				}
+
+				//recalculate import
+				var importe = (it.Precio - it.discountAmount)  * Cantidad;
+        
+				currentUserShoppingCart[c].Importe = Math.round(importe * 100) / 100;
+				
+				showScar(); //redraw table
+			}
+		}
+	}
+
     function showScar()
     {
         var tableCirs = document.getElementById('tableProducts');
@@ -422,7 +449,13 @@
 			cellImporte.innerHTML = tweet.Importe;
 			cellImagen.innerHTML = "<td><img src=\"" + tweet.imageUrl + "\" height=\"100\" width=\"100\"/></td>";
 
-			cellBorrar.innerHTML = "<a href=\"javascript: void();\" onclick=\"deleteItem(" + tweet.ProductID + ")\">Borrar</a>";
+			//cellBorrar.innerHTML = "<a href=\"javascript: void();\" onclick=\"deleteItem(" + tweet.ProductID + ")\">Borrar</a>";
+			
+			cellBorrar.innerHTML = 
+				" <td><input type=\"button\" onclick=\"modifyShoppingCartItemQuantity(" + tweet.ProductID + " , 1)\"  value=\" + \"/>"
+					+  
+				" <td><input type=\"button\" onclick=\"modifyShoppingCartItemQuantity(" + tweet.ProductID + " , -1)\"  value=\" - \"/>  ";
+
 
 			totalUni += parseFloat(tweet.Cantidad);
 			totImporte += tweet.Importe;
