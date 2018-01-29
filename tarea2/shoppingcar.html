@@ -401,6 +401,8 @@
                     
                     currentUserShoppingCart[c].Cantidad = Cantidad;
 
+                    sessionStorage.setObject('UserShoppingCart', currentUserShoppingCart);
+
                     showScar(); //redraw table
                 }
 			}
