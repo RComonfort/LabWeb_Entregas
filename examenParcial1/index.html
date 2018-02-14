@@ -117,7 +117,7 @@
 	</head>
 	<body onload="initializeAll()">
 
-	<!-- FACEBOOK LOGIN SCRIPT-->
+	<!-- FACEBOOK SCRIPT-->
 		<script> 
 			
 			//Initializer function for onload event, calls other functions that require information as soon as page has loaded
@@ -201,6 +201,14 @@
 					'Thanks for logging in, ' + response.name + '!';
 				});
 			}
+
+			window.fbAsyncInit = function() {
+			  FB.init({
+				appId      : '95100348886',
+				xfbml      : true,
+				version    : 'v2.6'
+			  });
+			};
 
 		</script>
 
@@ -840,24 +848,6 @@
 		<div id = "contactUs">
 			<a href="https://m.me/Pantuflas-Pantufla-2047503555274815/">Contáctanos!</a>
 		</div>
-
-		<script>
-			window.fbAsyncInit = function() {
-			  FB.init({
-				appId      : '95100348886',
-				xfbml      : true,
-				version    : 'v2.6'
-			  });
-			};
-	  
-			(function(d, s, id){
-			  var js, fjs = d.getElementsByTagName(s)[0];
-			  if (d.getElementById(id)) {return;}
-			  js = d.createElement(s); js.id = id;
-			  js.src = "//connect.facebook.net/en_US/sdk.js";
-			  fjs.parentNode.insertBefore(js, fjs);
-			}(document, 'script', 'facebook-jssdk'));
-		</script>
 	  
 		<div class="fb-page" 
 			data-href="https://www.facebook.com/2047503555274815/" 

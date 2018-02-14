@@ -26,6 +26,8 @@ def check_for_greeting(sentence):
     for word in sentence.words:
         if word.lower() in GREETING_KEYWORDS:
             return random.choice(GREETING_RESPONSES)
+    
+    return sentence
 
 @app.route('/webhook', methods=['GET', 'POST'])
 def webhook():
@@ -48,10 +50,18 @@ def message_handler(event):
     sender_id = event.sender_id
     # We see if the message is a text or an attachment (image, GIF, sticker, etc)
     if event.is_text_message:
-        # We get the message from the event variable and sent it back7
-        page.send(sender_id, "Hey, you send me: {}".format(event.message_text))
+
+        response = event.message_text.lower()
+
+        greeting = check_for_greeting(response)
+
+        if greeting == response
+            page.send(sender_id, "Hey, you send me: {}".format(response))
+        else
+            page.send(sender_id, "".format())
+        
     elif event.is_attachment_message:
-        page.send(sender_id, "I'm sorry, you have to send me text :). ")
+        page.send(sender_id, "I'm sorry, you have to send me text :) ")
 
 
 if __name__ == '__main__':
