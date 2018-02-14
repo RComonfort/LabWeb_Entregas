@@ -623,8 +623,8 @@
 					//lat =event.latLng.lat();
 					//lng=event.latLng.lng();
 
-					document.getElementById('lat').value=lat;
-					document.getElementById('lng').value=lng;
+					//document.getElementById('lat').value=lat;
+					//document.getElementById('lng').value=lng;
 					
 					map.clearMarkers();
 					//drawMarker();
@@ -676,11 +676,13 @@
 				$.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + 
 				lat + "&lon=" + lng + "&appid=" + apiKey + "&units=metric", function(data) 
 				{
-					alert(JSON.stringify(data));
+					//alert(JSON.stringify(data));
 					/*document.getElementById('weather').value = data.weather[0].main;
 					document.getElementById('pressure').value = data.main.pressure;
 					document.getElementById('humidity').value = data.main.humidity;
 					document.getElementById('temperature').value = data.main.temp;*/
+					alert("El clima actual en Santa Clara, California es " + data.weather[0].main +
+						", presion " + data.main.pressure + ", humedad " + data.main.humidity + " y temperatura de " + data.main.temp + "°C");
 				})
 			}
 		</script>
@@ -692,6 +694,7 @@
 			<a href="#store">Tienda</a>
 			<a href="#findUs">Encuentranos</a>
 			<a href="#videos">Videos</a>
+			<a href="#contactUs">Contactanos</a>
 		</div>
 
 	<!-- FACEBOOK and GMAIL LOGIN section ================================================== -->
@@ -786,7 +789,7 @@
 
 	<!-- Google Map area -->
 		<section id = "findUs">
-			
+
 		</section>
 			<div style="height:100%; width:100%;">
 				<tr>
@@ -813,7 +816,7 @@
 		<hr>
 
 	<!-- Pseudo Footer and inv to chatbot ================================================== -->
-		<div>
+		<div id = "contactUs">
 			<a href="https://www.facebook.com/Pantuflas-Pantufla-2047503555274815/">Visite nuestra pagina web y mandenos un mensaje!</a>
 		</div>
 
