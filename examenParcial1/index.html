@@ -59,6 +59,10 @@
 					border: 1px solid #ccc;
 				}
 			}
+
+			footer { 
+				display: block;
+			}
 		</style>
 
 		<!-- Google web font ================================================== -->	
@@ -165,6 +169,7 @@
 			<a href="#videos">Videos</a>
 		</div>
 
+		<!-- FACEBOOK and GMAIL LOGIN section ================================================== -->
 		<section id="login">
 			<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
 			</fb:login-button>
@@ -172,16 +177,6 @@
 			</div>
 
 			<div class="g-signin2" data-onsuccess="onSignIn"></div>
-
-			<form action="/action_page.php">
-				<label for="male">Male</label>
-				<input type="radio" name="gender" id="male" value="male"><br>
-				<label for="female">Female</label>
-				<input type="radio" name="gender" id="female" value="female"><br>
-				<label for="other">Other</label>
-				<input type="radio" name="gender" id="other" value="other"><br><br>
-				<input type="submit" value="Submit">
-			  </form>
 
 			<p></p>
 			<script>
@@ -204,6 +199,16 @@
 		</section>
 
 		<hr>
+
+		<div>
+			<a href="https://www.facebook.com/Pantuflas-Pantufla-2047503555274815/">Visite nuestra pagina web y mandenos un mensaje!</a>
+		</div>
+
+		<footer>
+			<p>Enero 2018 | Proyecto Parcial 1 Laboratorio de Desarrollo de Aplicaciones Web by Rafael Antonio Comonfort Viveros</p>
+			<p>Contact information: <a href="A01324276@itesm.mx">
+					A01324276@itesm.mx</a>.</p>
+		</footer>
 
 	</body>
 </html>
