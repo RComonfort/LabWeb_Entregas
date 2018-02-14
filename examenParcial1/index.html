@@ -75,6 +75,27 @@
 			footer { 
 				display: block;
 			}
+
+			.fb-page, .fb-page:before, .fb-page:after {
+				border: 1px solid #ccc;
+			}
+
+			.fb-page:before, .fb-page:after {
+				content: "";
+				position: absolute;
+				bottom: -3px;
+				left: 2px;
+				right: 2px;
+				height: 1px;
+				border-top: none
+			}
+			
+			.fb-page:after {
+				left: 4px;
+				right: 4px;
+				bottom: -5px;
+				box-shadow: 0 0 2px #ccc
+			}
 		</style>
  
 		<!-- Google web font ================================================== -->	
@@ -815,9 +836,46 @@
 
 		<hr>
 
-	<!-- Pseudo Footer and inv to chatbot ================================================== -->
+	<!-- Pseudo Footer and Chatbot ================================================== -->
 		<div id = "contactUs">
-			<a href="https://www.facebook.com/Pantuflas-Pantufla-2047503555274815/">Visite nuestra pagina web y mandenos un mensaje!</a>
+			<a href="https://m.me/Pantuflas-Pantufla-2047503555274815/">Contáctanos!</a>
+		</div>
+
+		<script>
+			window.fbAsyncInit = function() {
+			  FB.init({
+				appId      : '95100348886',
+				xfbml      : true,
+				version    : 'v2.6'
+			  });
+			};
+	  
+			(function(d, s, id){
+			  var js, fjs = d.getElementsByTagName(s)[0];
+			  if (d.getElementById(id)) {return;}
+			  js = d.createElement(s); js.id = id;
+			  js.src = "//connect.facebook.net/en_US/sdk.js";
+			  fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script>
+	  
+		<div class="fb-page" 
+			data-href="https://www.facebook.com/2047503555274815/" 
+			data-tabs="messages" 
+			data-width="400" 
+			data-height="300" 
+			data-small-header="true">
+			<div class="fb-xfbml-parse-ignore">
+				<blockquote></blockquote>
+			</div>
+		</div>
+
+		<div class="fb-page" 
+			data-href="https://www.facebook.com/Pantuflas-Pantufla-2047503555274815/"  
+			data-small-header="false"  
+			data-hide-cover="false"    
+			data-show-facepile="true"  
+			data-show-posts="false">
 		</div>
 
 		<footer>
