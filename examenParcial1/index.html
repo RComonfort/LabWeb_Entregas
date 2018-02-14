@@ -661,6 +661,7 @@
 		<meta name="google-signin-scope" content="profile email">
 		<meta name="google-signin-client_id" content="752960315798-egqp9djl1bfr1qg75uk7g49csu5ukhqj.apps.googleusercontent.com">
 		<script src="https://apis.google.com/js/platform.js" async defer></script>	
+		
 	</head>
 	<body>
 
@@ -696,7 +697,7 @@
 
 			window.fbAsyncInit = function() {
 				FB.init({
-				appId      : '180850676006281',//'1536474956443328',
+				appId      : '167425190709768',//'180850676006281',
 				cookie     : true,  // enable cookies to allow the server to access 
 									// the session
 				xfbml      : true,  // parse social plugins on this page
@@ -759,6 +760,8 @@
 			</fb:login-button>
 			<div id="status">
 			</div>
+
+			<div class="g-signin2" data-onsuccess="onSignIn"></div>
 
 			<form action="/action_page.php">
 				<label for="male">Male</label>
