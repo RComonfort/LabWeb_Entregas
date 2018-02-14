@@ -5,7 +5,19 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<style>
+		<style type="text/css">
+			.colorYellow { color: yellow; }
+			.colorRed { color: red; }
+			.colorBlue { color: blue; }
+			.colorGreen { color: green; }
+			
+			html, body, #map-canvas {
+				margin: 0;
+				padding: 0;
+				height: 100%;
+				width: 100%;
+			}
+			
 			/* Add a black background color to the top navigation bar */
 			.topnav {
 				overflow: hidden;
@@ -68,6 +80,7 @@
 		<!-- Google web font ================================================== -->	
 		<link href='https://fonts.googleapis.com/css?family=Montserrat:700,400' rel='stylesheet' type='text/css'>
 
+		<!-- Bootstrap and JQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
@@ -76,13 +89,23 @@
 		<meta name="google-signin-scope" content="profile email">
 		<meta name="google-signin-client_id" content="752960315798-egqp9djl1bfr1qg75uk7g49csu5ukhqj.apps.googleusercontent.com">
 		<script src="https://apis.google.com/js/platform.js" async defer></script>	
+
+		<!-- Google Maps ================================================== -->
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADB8fsvCpuHHkGrOHTYr7dujn340sZ-IQ&sensor=true"> </script> 
 		
 	</head>
-	<body onload="initialize()">
+	<body onload="initializeAll()">
 
 	<!-- FACEBOOK LOGIN SCRIPT-->
 		<script> 
 			
+			//Initializer function for onload event, calls other functions that require information as soon as page has loaded
+			function initializeAll()
+			{
+				initialize();
+				initMap();
+			}
+
 			// This is called with the results from from FB.getLoginStatus().
 			function statusChangeCallback(response) {
 				console.log('statusChangeCallback');
@@ -185,28 +208,60 @@
 		
 				var myProduct1 = new ShoppingCarProduct();
 				myProduct1.id = "001";
-				myProduct1.name = "Laptop Dell";
-				myProduct1.price = "12000";
-				myProduct1.url = 'https://www.paklap.pk/media/catalog/product/cache/1/image/9c5004876a717e4eff484ec42ea17046/7/5/7567_red_color.jpg';
-				myProduct1.discountPercent = "0.15";
+				myProduct1.name = "Nvidia Titan V";
+				myProduct1.price = "58000";
+				myProduct1.url = 'https://www.nvidia.com/content/dam/en-zz/Solutions/geforce/TITAN/TITANV/nvidia-titan-v-gallery-b-641-u.jpg';
+				myProduct1.discountPercent = "0.10";
 		
 				var myProduct2 = new ShoppingCarProduct();
 				myProduct2.id = "002";
-				myProduct2.name = "Xbox One S";
-				myProduct2.price = "9500";
-				myProduct2.url = 'https://cnet1.cbsistatic.com/img/Dri_6795D7EYs2dvS-RTfEvwNbc=/770x433/2016/08/01/81dd9937-d2f9-4730-8d9b-cca30379da27/xboxones.jpg';
+				myProduct2.name = "NVIDIA TITAN Xp";
+				myProduct2.price = "23500";
+				myProduct2.url = 'https://www.nvidia.com/content/dam/en-zz/Solutions/geforce/geforce-titan-xp1/gallery-images/geforce-titan-xp-gallery-c.png';
 				myProduct2.discountPercent = "0.03";
 		
 				var myProduct3 = new ShoppingCarProduct();
 				myProduct3.id = "003";
-				myProduct3.name = "RaspBerry Pi 3";
-				myProduct3.price = "1250";
-				myProduct3.url = 'https://img.banggood.com/thumb/water/oaupload/banggood/images/39/3C/7fd0736b-db37-4677-b2a8-9a386a853eba.jpg';
-				myProduct3.discountPercent = "0.25";
+				myProduct3.name = "GEFORCE® GTX 1080 Ti";
+				myProduct3.price = "16000";
+				myProduct3.url = 'http://fudzilla.com/images/stories/2016/November/nvidia-gtx1080Ti-1.jpg';
+				myProduct3.discountPercent = "0.01";
 		
+				var myProduct4 = new ShoppingCarProduct();
+				myProduct4.id = "004";
+				myProduct4.name = "GEFORCE® GTX 1080";
+				myProduct4.price = "13499";
+				myProduct4.url = 'https://www.geforce.com/sites/default/files-world/gallery_images/nvidia-geforce-gtx-1080-stylized-bodyRightClear.jpg';
+				myProduct4.discountPercent = "0.01";
+
+				var myProduct5 = new ShoppingCarProduct();
+				myProduct5.id = "005";
+				myProduct5.name = "GEFORCE® GTX 1070 Ti";
+				myProduct5.price = "11499";
+				myProduct5.url = 'https://images.nvidia.com/pascal/img/gtx-1070-ti/gallery/gallery-2.jpg';
+				myProduct5.discountPercent = "0.01";
+
+				var myProduct6 = new ShoppingCarProduct();
+				myProduct6.id = "006";
+				myProduct6.name = "GEFORCE® GTX 1070";
+				myProduct6.price = "8600";
+				myProduct6.url = 'https://images.nvidia.com/pascal/img/gtx1070/gallery/GTX1070_angleLeftFlatLongPhoto-Thumb.jpg';
+				myProduct6.discountPercent = "0.00";
+
+				var myProduct7 = new ShoppingCarProduct();
+				myProduct7.id = "007";
+				myProduct7.name = "GEFORCE® GTX 1060";
+				myProduct7.price = "6200";
+				myProduct7.url = 'https://static.gamespot.com/uploads/original/1568/15683559/3096529-gtx+1060+review.png';
+				myProduct7.discountPercent = "0.01";
+
 				listProducts.push(myProduct1);
 				listProducts.push(myProduct2);
 				listProducts.push(myProduct3);
+				listProducts.push(myProduct4);
+				listProducts.push(myProduct5);
+				listProducts.push(myProduct6);
+				listProducts.push(myProduct7);
 		
 				try
 				{ 
@@ -512,9 +567,161 @@
 			
 		</script>
 
+	<!-- GOOGLE MAPS SCRIPT-->
+	<script type="text/javascript">
+
+		var mapOptions = null;
+		var map = null;
+		
+		var infowindow;
+		(function () 
+		{
+				google.maps.Map.prototype.markers = new Array();
+				google.maps.Map.prototype.getMarkers = function ()
+				{
+				return this.markers
+				};
+			
+				google.maps.Map.prototype.clearMarkers = function () 
+				{
+					for (var i = 0; i < this.markers.length; i++) {
+						this.markers[i].setMap(null);
+					}
+				this.markers = new Array();
+				};
+			
+				google.maps.Marker.prototype._setMap = google.maps.Marker.prototype.setMap;
+				google.maps.Marker.prototype.setMap = function (map) 
+				{
+					if (map) {
+						map.markers[map.markers.length] = this;
+					}
+					this._setMap(map);
+			}
+		}
+		)();
+		
+		function initMap() {
+			
+			lat = 37.370281;
+			lng = -121.967272;
+
+			/*lat= 19.01826447750003;
+			lng = -98.24133396148682;*/
+
+			mapOptions = {
+				center: new google.maps.LatLng(lat, lng),
+				zoom: 14,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+
+			map = new google.maps.Map(document.getElementById("map_canvas"),
+				mapOptions);
+			
+			google.maps.event.addListener(map, 'click', function (event) {
+				
+				//lat =event.latLng.lat();
+				//lng=event.latLng.lng();
+
+				document.getElementById('lat').value=lat;
+				document.getElementById('lng').value=lng;
+				
+				map.clearMarkers();
+				//drawMarker();
+			});
+
+			//drawMarker();
+		}
+
+		
+		function drawMarker() 
+		{
+			
+			var infowindow = new google.maps.InfoWindow();
+			var marker, i; 
+
+			var nombre = "A pin";//sessionStorage.nombreCliente;
+			var message = document.getElementById("pinMessage").value;//"Tec de Mty";
+			var pinColor = document.getElementById("pinColor").value.substr(1);//"FF0000";
+			var charMarker = document.getElementById("pinChar").value;//"$";//%E2%80%A2 
+
+			var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=" + charMarker + "|" + pinColor,
+					new google.maps.Size(21, 34),
+					new google.maps.Point(0, 0),
+					new google.maps.Point(10, 34));
+
+				marker = new google.maps.Marker({
+					position: new google.maps.LatLng(lat, lng),
+					icon: pinImage,
+					title: '' + message,
+					map: map
+				});
+
+				google.maps.event.addListener(marker, 'click', (function (marker, i) {
+					return function () {
+						infowindow.setContent(nombre);
+						infowindow.open(map, marker);
+					}
+				})(marker, i));
+			
+		}
+
+		
+
+		function obtenerDireccion()
+		{
+			//alert("obteniendo direccion ...");
+
+			var geocoder = new google.maps.Geocoder;
+			
+			var mylat = document.getElementById('lat').value;
+			var mylng = document.getElementById('lng').value;
+
+			var latlng = {lat: parseFloat(mylat), lng: parseFloat(mylng)};
+			geocoder.geocode({'location': latlng}, function(results, status) {
+				if (status === 'OK') {
+				if (results[0]) {
+					//window.alert(results[0].formatted_address);
+					//alert(JSON.stringify(results[0]));
+				
+					document.getElementById('street').value = results[0].address_components[1].long_name + ", " + results[0].address_components[0].long_name;
+					document.getElementById('sublocality').value = results[0].address_components[2].short_name;
+					document.getElementById('zipCode').value = results[0].address_components[7].short_name;
+					document.getElementById('locality').value = results[0].address_components[3].short_name + ", " + results[0].address_components[5].short_name + ", "  + results[0].address_components[6].short_name;
+
+				} else {
+					window.alert('No results found');
+				}
+				} else {
+					window.alert('Geocoder failed due to: ' + status);
+				}
+			});
+		}
+
+
+		function obtenerClima()
+		{
+			//alert("obteniendo clima ...");
+
+			var lat = 19.0433;
+			var lng = -98.2019;
+			var apiKey = "17f79e6dbec989fa0b19444f82406f99";//"2af72ef62258728d72777bef612f2a3e";
+
+			$.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + 
+			lat + "&lon=" + lng + "&appid=" + apiKey + "&units=metric", function(data) 
+			{
+				//alert(JSON.stringify(data));
+				document.getElementById('weather').value = data.weather[0].main;
+				document.getElementById('pressure').value = data.main.pressure;
+				document.getElementById('humidity').value = data.main.humidity;
+				document.getElementById('temperature').value = data.main.temp;
+			})
+		}
+	</script>
+
 	<!-- Navigation section ================================================== -->
 		<div class="topnav">
-			<a class="active" href="#home">Nvidia Products</a>
+			<a class="active" href="#home">Tarjetas de Video Nvidia</a>
 			<a href="#login">Login</a>
 			<a href="#store">Tienda</a>
 			<a href="#findUs">Encuentranos</a>
@@ -611,12 +818,45 @@
 
 		<hr>
 
-		<section id = "videos">                 
+	<!-- Google Map area -->
+		<section id = "findUs">
+			<div style="height:100%; width:100%;">
+				<tr>
+					<div id="map_canvas"  style="width: 100%; height: 90%; float: left; border: 1px solid black;"></div>
+				</tr>
+				<tr>
+					<td>
+						<div class = "container">
+							<form>
+								<label for = "weather">Clima: </label>
+								<input type = "text" id="weather" readonly>
+			
+								<label for = "pressure">Presión: </label>
+								<input type = "text" id="pressure" readonly>
+			
+								<label for = "humidity">Humedad: </label>
+								<input type = "text" id="humidity" readonly>
+			
+								<label for = "temperature">Temperatura (C°): </label>
+								<input type = "text" id="temperature" readonly>
+			
+								<input type="button" value="Obtener Clima" onclick="obtenerClima()"/>
+							</form>	
+						</div>    
+					</td>
+				</tr>
+			</div>
+			
+		</section>
 
+		<hr>
+	<!-- Shopping Cart area ================================================== -->
+
+		<section id = "videos">                 
 			<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLF3A64ED42EC43237" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 		</section>
 
-		
+		<hr>
 
 	<!-- Pseudo Footer and inv to chatbot ================================================== -->
 		<div>
@@ -625,7 +865,7 @@
 
 		<footer>
 			<p>Enero 2018 | Proyecto Parcial 1 Laboratorio de Desarrollo de Aplicaciones Web by Rafael Antonio Comonfort Viveros</p>
-			<p>Contact information: <a href="A01324276@itesm.mx">
+			<p>Informacion de Contacto: <a href="A01324276@itesm.mx">
 					A01324276@itesm.mx</a>.</p>
 		</footer>
 

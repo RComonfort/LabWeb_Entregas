@@ -27,10 +27,10 @@ type="text/javascript"></script> -->
 
         var mapOptions = null;
         var map = null;
-       
+        
         var infowindow;
         (function () 
-            {
+        {
                 google.maps.Map.prototype.markers = new Array();
                 google.maps.Map.prototype.getMarkers = function ()
                 {
@@ -52,9 +52,9 @@ type="text/javascript"></script> -->
                         map.markers[map.markers.length] = this;
                     }
                     this._setMap(map);
-                }
+            }
         }
-            )();
+        )();
         
         function initMap() {
             
@@ -116,11 +116,11 @@ type="text/javascript"></script> -->
                         infowindow.open(map, marker);
                     }
                 })(marker, i));
-           
+            
         }
 
         
-    
+
     function obtenerDireccion()
     {
         //alert("obteniendo direccion ...");
@@ -160,7 +160,7 @@ type="text/javascript"></script> -->
         var lng = -98.2019;
         var apiKey = "17f79e6dbec989fa0b19444f82406f99";//"2af72ef62258728d72777bef612f2a3e";
 
-      $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + 
+        $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + 
         lat + "&lon=" + lng + "&appid=" + apiKey + "&units=metric", function(data) 
         {
             //alert(JSON.stringify(data));
@@ -170,8 +170,7 @@ type="text/javascript"></script> -->
             document.getElementById('temperature').value = data.main.temp;
         })
     }
-
-    </script>
+</script>
   
   <style type="text/css">
         .colorYellow { color: yellow; }
@@ -250,10 +249,7 @@ type="text/javascript"></script> -->
     </table>
 </div>
 
-
-      <div id="map_canvas"  style="width: 100%; height: 90%; float: left; border: 1px solid black;">
-
-      </div>
+<div id="map_canvas"  style="width: 100%; height: 90%; float: left; border: 1px solid black;"></div>
      
 </body>
 </html>
