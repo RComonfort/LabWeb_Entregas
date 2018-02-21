@@ -39,8 +39,8 @@ def check_for_greeting(sentence):
 @app.route('/webhook', methods=['GET', 'POST'])
 def webhook():
     """This method executes as Facebook connect to us."""
-	if request.method == 'POST':  # if the message is a POST, we handle it with message_handler. Si el mensaje es POST, se maneja con el message_handler
-        # Facebook sends the user messages with a POST. Facebook manda los mensajes del usuario con un POST.
+        if request.method == 'POST':  # if the message is a POST, we handle it with message_handler. Si el mensaje es POST, se maneja con el message_handler
+            # Facebook sends the user messages with a POST. Facebook manda los mensajes del usuario con un POST.
         page.handle_webhook(request.get_data(as_text=True))
         return 'ok'
     # if the message is a GET, we handle it here.
@@ -55,43 +55,46 @@ def webhook():
 def respond(sentence):
     cleaned = preprocess_text(sentence)
     parsed = TextBlob(cleaned)
-	
-	pronoun, noun, adjective, verb = find_candidate_parts_of_speech(parsed)
-	resp = check_for_comment_about_bot(pronoun, noun, adjective)
 
-	if not resp:
-		resp = check_for_greeting(parsed)
+        pronoun, noun, adjective, verb = find_candidate_parts_of_speech(parsed)
+        resp = check_for_comment_about_bot(pronoun, noun, adjective)
 
-	if not resp:
-		if not pronoun:
-			resp = random.choice(NONE_RESPONSES)
-		elif pronoun == 'I' and not verb:
-			resp = random.choice(COMMENTS_ABOUT_SELF)
-		else:
-			resp = construct_response(pronoun, noun, verb)
+        if not resp:
+            resp = check_for_greeting(parsed)
 
-	if not resp:
-		resp = random.choice(NONE_RESPONSES)
+        if not resp:
+            if not pronoun:
+                resp = random.choice(NONE_RESPONSES)
+            elif pronoun == 'I' and not verb:
+                resp = random.choice(COMMENTS_ABOUT_SELF)
+            else:
+                resp = construct_response(pronoun, noun, verb)
 
-	logger.info("Returning phrase '%s'", resp)
-	filter_response(resp)
+        if not resp:
+            resp = random.choice(NONE_RESPONSES)
 
-	return resp
+        logger.info("Returning phrase '%s'", resp)
+        filter_response(resp)
+
+        return resp
+
 
 def find_candidate_parts_of_speech(parsed):
-	pronoun = None
-	noun = None
-	adjective = None
-	verb = None
+    pronoun = None
+    noun = None
+    adjective = None
+    verb = None
 
-	for sent in parsed.sentences:
-		pronoun = find_pronoun (sent)
-		noun = find_noun (sent)
-		adjective = find_adjective(sent)
-		verb = find_verb (sent)
-	
-	logger.info("Pronoun=%s, noun=%s, adjective=%s, verb=%s", pronoun, noun, adjective, verb)
-	return pronoun, noun, adjective, verb
+    for sent in parsed.sentences:
+        pronoun = find_pronoun(sent)
+        noun = find_noun(sent)
+        adjective = find_adjective(sent)
+        verb = find_verb(sent)
+
+    logger.info("Pronoun=%s, noun=%s, adjective=%s, verb=%s",
+                pronoun, noun, adjective, verb)
+    return pronoun, noun, adjective, verb
+
 
 @page.handle_message
 def message_handler(event):
