@@ -1,0 +1,15 @@
+{
+  "name": "hello-vue-labweb",
+  "version": "1.0.0",
+  "description": "hello-vue project - A01324276",
+  "author": "rcomonfort",
+  "scripts": {
+    "dev": "nodemon app.js --watch server"
+  },
+  "dependencies": {
+    "express": "^4.15.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
