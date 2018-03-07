@@ -3,7 +3,7 @@
 
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('postgres://adsoft:5i5i5i5i@localhost:5433/shopcar');
+const sequelize = new Sequelize('postgres://adsoft:5i5i5i5i@localhost:5432/shopcar');
 sequelize
   .authenticate()
   .then(() => {
