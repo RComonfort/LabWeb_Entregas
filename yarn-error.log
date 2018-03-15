@@ -1,0 +1,43 @@
+Arguments: 
+  /usr/local/bin/node /usr/share/yarn/bin/yarn.js install
+
+PATH: 
+  /home/rcv/bin:/home/rcv/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  9.5.0
+
+Platform: 
+  linux x64
+
+npm manifest: 
+  {
+    "name": "rcomonfort",
+    "private": true,
+    "version": "1.0.0",
+    "description": "Docker container demo",
+    "author": "rcomonfort a.comonfort@outlook.com",
+    "dependencies": {
+        "express": "3.2.2"
+      }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Found incompatible module
+      at new MessageError (/usr/share/yarn/lib/cli.js:186:110)
+      at checkOne (/usr/share/yarn/lib/cli.js:62444:11)
+      at Object.check (/usr/share/yarn/lib/cli.js:62463:5)
+      at /usr/share/yarn/lib/cli.js:22803:73
+      at Generator.next (<anonymous>)
+      at step (/usr/share/yarn/lib/cli.js:98:30)
+      at /usr/share/yarn/lib/cli.js:109:13
+      at <anonymous>
