@@ -1,30 +1,39 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Tasks', {
+    return queryInterface.createTable('sepomexes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      duration: {
+      idestado: {
         type: Sequelize.INTEGER
       },
-      name: {
+      estado: {
         type: Sequelize.TEXT
       },
-      completed: {
-        type: Sequelize.BOOLEAN
+      idmunicipio: {
+        type: Sequelize.INTEGER
       },
-      user_story_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'User_stories',
-          key: 'id',
-        }
+      municipio: {
+        type: Sequelize.TEXT
+      },
+      ciudad: {
+        type: Sequelize.TEXT
+      },
+      zona: {
+        type: Sequelize.TEXT
+      },
+      cp: {
+        type: Sequelize.INTEGER
+      },
+      asentamiento: {
+        type: Sequelize.TEXT
+      },
+      tipo: {
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
@@ -37,6 +46,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Tasks');
+    return queryInterface.dropTable('sepomexes');
   }
 };

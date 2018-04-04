@@ -15,7 +15,19 @@ if (config.use_env_variable) {
   );
 }
 
-fs
+var Todo = sequelize.import(path.join(__dirname, 'Todo'));
+var TodoItem = sequelize.import(path.join(__dirname, 'TodoItem'));
+//var LinkTable = sequelize.import(path.join(__dirname, 'LinkTable'));
+
+Todo.belongsToMany(TodoItem, {as: 'TodoItems', through: 'LinkTables'});
+TodoItems.belongsToMany(Todo, {as: 'Todos', through: 'LinkTables'});
+
+sequelize.sync();
+
+exports.Todo = Todo;
+exports.TodoItem = TodoItem;
+
+/*fs
   .readdirSync(__dirname)
   .filter(file =>
     (file.indexOf('.') !== 0) &&
@@ -30,7 +42,7 @@ Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
-});
+});*/
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

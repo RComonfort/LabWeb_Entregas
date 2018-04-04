@@ -8,6 +8,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      todoItemId: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
       content: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -23,15 +29,6 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-      },
-      todoId: {
-        type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'Todos',
-          key: 'id',
-          as: 'todoId',
-        },
       },
     }),
   down: (queryInterface /* , Sequelize */) =>

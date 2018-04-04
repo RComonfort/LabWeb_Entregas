@@ -1,5 +1,6 @@
 const todosController = require('../controllers').todos;
-const todoItemsController = require('../controllers').todoItems;
+const todoItemsController = require('../controllers').todoitems;
+const linkTablesController = require('../controllers').linkTables;
 
 module.exports = (app) => {
   app.get('/api', (req, res) => res.status(200).send({
@@ -15,8 +16,10 @@ module.exports = (app) => {
   app.post('/api/todos/:todoId/items', todoItemsController.create);
   app.put('/api/todos/:todoId/items/:todoItemId', todoItemsController.update);
   app.delete(
-    '/api/todos/:todoId/items/:todoItemId', todoItemsController.destroy
-  );
+    '/api/todos/:todoId/items/:todoItemId', todoItemsController.destroy);
+
+  app.post('/api/linkTables', linkTablesController.create);
+  app.get('/api/linkTables', linkTablesController.list);
 
   // For any other request method on todo items, we're going to return "Method Not Allowed"
   app.all('/api/todos/:todoId/items', (req, res) =>
