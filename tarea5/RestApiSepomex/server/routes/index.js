@@ -10,6 +10,6 @@ module.exports = (app) => {
 
   app.get('/api/sepomex-edos', sepomexController.listEdos);
   app.get('/api/sepomex-municipios/:idestado',   sepomexController.listMunicipios);
-  app.post('/api/sepomex-colonias/',   sepomexController.listColonias);
+  app.post('/api/sepomex-colonias',   sepomexController.listColonias);
 
 };

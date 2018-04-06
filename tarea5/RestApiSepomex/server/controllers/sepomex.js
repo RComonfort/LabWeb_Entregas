@@ -12,7 +12,7 @@ module.exports = {
 	},
 	listMunicipios (req, res)
 	{
-		if (!req.params.idestado || !Numbers.isInteger(req.params.idestado))
+		if (!req.params.idestado)
 	  return res.status(400).send({message: 'El id del estado debe ser un numero entero valido'});
 	  
 	  return Sepomex
@@ -25,13 +25,13 @@ module.exports = {
 	},
 	listColonias (req, res)
 	{
-		var hasIdEdo;
-		var hasIdMpio;
+		var hasIdEdo = true;
+		var hasIdMpio = true;
 
-		if (!req.body.idestado || Numbers.isInteger(req.body.idestado))
+		if (!req.body.idestado)
 			hasIdEdo = false;
 
-		if (!req.body.idmunicipio || Numbers.isInteger(req.body.idmunicipio))
+		if (!req.body.idmunicipio)
 		hasIdMpio = false;
 
 		if (!hasIdEdo && !hasIdMpio)
