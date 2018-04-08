@@ -101,7 +101,7 @@ export default {
   methods: {
  
   getproducts() {
-    axios.get('http://localhost:8081/api/products')
+    axios.get('http://localhost:8000/api/products')
     .then(response => {
       // JSON responses are automatically parsed.
       this.posts = response.data
@@ -112,7 +112,7 @@ export default {
   },
 
   getoneproduct(idproduct) {
-    axios.get('http://localhost:8081/api/products/'+ idproduct)
+    axios.get('http://localhost:8000/api/products/'+ idproduct)
     .then(response => {
       // JSON responses are automatically parsed.
       this.product = response.data
@@ -126,7 +126,7 @@ export default {
 
   addProduct() {
     alert(this.product.codigo + this.product.nombre + this.product.precio + this.product.exist);
-    axios.post('http://localhost:8081/api/products',  this.product)
+    axios.post('http://localhost:8000/api/products',  this.product)
     .then(response => {
       alert("status: " + response.status + ", inserted: " + JSON.stringify(response.data));
     })
@@ -138,7 +138,7 @@ export default {
   updateProduct() {
     //alert(idproduct);
     alert(this.product.id);
-    axios.put('http://localhost:8081/api/products/' + this.product.id,  this.product)
+    axios.put('http://localhost:8000/api/products/' + this.product.id,  this.product)
     .then(response => {
       alert("status: " + response.status + ", updated: " + JSON.stringify(response.data));
       this.getproducts();
@@ -153,7 +153,7 @@ export default {
   deleteProduct(idproduct) {
     alert("delete" + idproduct);
     
-    axios.delete('http://localhost:8081/api/products/' + idproduct)
+    axios.delete('http://localhost:8000/api/products/' + idproduct)
     .then(response => {
 
       alert("status: " + response.status + ", deleted: " + JSON.stringify(response.data));
