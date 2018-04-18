@@ -12,6 +12,7 @@ VERIFY_TOKEN = "EchoBotChido"
 app = Flask(__name__)
 page = Page(PAGE_ACCESS_TOKEN) 
 
+
 @app.route('/')
 def hello_world():
     """La página principal del servidor. The server main page."""

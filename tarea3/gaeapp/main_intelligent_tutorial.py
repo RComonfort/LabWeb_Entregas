@@ -3,6 +3,7 @@ import random
 import logging
 import os
 
+
 os.environ['NLTK_DATA'] = os.getcwd() + '/nltk_data'
 
 from textblob import TextBlob
